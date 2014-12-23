@@ -1,0 +1,26 @@
+{% extends "task_submit/task_submit.html" %}
+
+{% block title %}任务量提交{% endblock %}
+
+{% block task_sidebar %}
+	<li><a href = "/task_submit/submit">任务量提交</a></li>
+{% endblock %}
+
+{% block content %}
+<h2>请提交本月任务量信息：</h2>
+<form action="/task_submit/task_info/" method="POST">
+{% csrf_token %}
+	<table>
+    {% for field in form %}
+      <div class="fieldWrapper">
+      	<tr>
+         <td>{{ field.label_tag }}</td>
+         <td>{{ field }} </td>
+         <td>{{ field.errors }}</td>
+     	</tr>
+      </div>
+    {% endfor %}
+	</table>
+    <div class="fieldWrapper"><p><input type="submit" value="提交" /></p></div>
+</form>
+{% endblock %}

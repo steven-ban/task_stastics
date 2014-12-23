@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'my-base.css' %}" />	
+
+
+<html lang="zh-cn">
+<head>
+	<title>{% block title %}光学室信息管理系统{% endblock %}</title>
+</head>
+
+<body>
+	<div id="title">
+		<h1 align=center><img src="{% static "sipo-logo.jpg" %}" />国家知识产权局专利局专利审查协作河南中心光电技术发明审查部</h1>
+		<h1 align=center>光学室信息管理系统</h1>
+	</div>
+	<div id="navibar" align=center>
+		<table>
+		<tr>
+			<td><a href = "/">首页</a></td>
+			<td><a href = "/task_submit/">任务量</a></td>
+		</tr>
+		</table>
+	</div>
+	<div id="sidebar">
+		<p align=right>当前时间：{% now "Y-m-d H:i:s" %}。</p>
+		{% if user.is_authenticated %}
+			<p>欢迎你，{{user.username}}。</p>
+		{% else %}
+			<p>请<a href = "/login/">登录。</a></p>
+		{% endif %}
+
+		{% block sidebar %}
+		<ul>
+			{% block new_sidebar_list %}
+			{% endblock %}
+		</ul>
+		{% endblock %}
+	</div>
+	
+	<hr>
+	
+	<div id="content" align=center>
+		{% block content %}
+		{% endblock %}
+	</div>
+	
+	<hr>
+	<div id="bottom-section">
+		<p align = center>光学室信息管理系统，使用Python及Django框架开发，内含重要信息，仅供内部使用，请勿随意发布至互联网。</p>
+	</div>
+</body>
+</html>

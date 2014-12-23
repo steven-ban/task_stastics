@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block title %}任务量{%endblock%}
+
+{%block new_sidebar_list%}
+	<li><a href = "/task_submit/submit">任务量提交</a></li>
+	<li><a href = "/task_submit/task_info">任务量信息</a></li>
+	<ul>
+		{% block task_sidebar%}{%endblock%}
+	</ul>
+{%endblock%}
