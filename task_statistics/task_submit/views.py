@@ -4,6 +4,8 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 from datetime import datetime
 from decimal import Decimal, Context, getcontext
@@ -17,7 +19,12 @@ def index(request):
 	
 # submit form
 def task_submit_form_page(request):
-	form = task_submit_form()
+	form = task_submit_form(request.POST)
+	submit = form.save(commit = False)
+	submit.full_clean()
+	submit.theExaminer = reqeust.user
+	submit.submitTime = timezone.now()
+	submit.save()
 	return render_to_response('task_submit/submit.html', \
 			{'form': form, 'user' : request.user}, \
 			context_instance = RequestContext(request))
