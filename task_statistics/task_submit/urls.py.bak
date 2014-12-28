@@ -1,7 +1,6 @@
 #coding=utf-8
 
 from django.conf.urls import include, url
-
 from task_submit import views
 
 urlpatterns = [
