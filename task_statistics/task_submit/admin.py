@@ -13,8 +13,8 @@ class task_submitAdmin(admin.ModelAdmin):
 		'boHui', 'shiChe', 'jieAnBeiZhu', 'submitTime')
 		
 class monthly_taskAdmin(admin.ModelAdmin):
-	fields = ['theExaminer', 'monthlyTask', 'month']
-	list_display = ('theExaminer', 'monthlyTask', 'month')
+	fields = ['theExaminer', 'monthlyTask', 'year', 'month']
+	list_display = ('theExaminer', 'monthlyTask', 'year', 'month')
 
 admin.site.register(task_submit, task_submitAdmin)
 admin.site.register(monthly_task, monthly_taskAdmin)

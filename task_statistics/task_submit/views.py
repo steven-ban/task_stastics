@@ -13,10 +13,6 @@ from decimal import Decimal, Context, getcontext
 from task_submit.form import task_submit_form
 from task_submit.models import task_submit
 
-# Create your views here.
-def index(request):
-	return render_to_response('task_submit/task_submit.html')
-	
 # submit form
 def task_submit_form_page(request):
 	form = task_submit_form(request.POST)
@@ -38,7 +34,7 @@ def task_submit_form_page(request):
 # after submit, show info
 def task_info_page(request):
 	context = {}
-	task_info = task_submit.objects.filter(theExaminer = request.user).latest('submitTime')
+	task_info = task_submit.objects.all().filter(theExaminer = request.user).latest('submitTime')
 	if task_info : 
 		last_update = task_info.submitTime
 		if ((last_update.year == timezone.now().year) and (last_update.month == timezone.now().month)) :
