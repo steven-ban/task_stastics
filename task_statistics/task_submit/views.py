@@ -11,13 +11,13 @@ from datetime import datetime
 from decimal import Decimal, Context, getcontext
 
 from task_submit.form import task_submit_form
-from task_submit.models import task_submit
+from task_submit.models import task_submit as ts
 
 # submit form
 def task_submit_form_page(request):
 	form = task_submit_form(request.POST)
 	if form.is_valid():
-		last_update_time = task_submit.object.filter(\
+		last_update_time = ts.object.filter(\
 				theExaminer = request.user).latest(\
 				submitTime)
 		if last_update_time.date() == timezone.now.date():
@@ -34,7 +34,7 @@ def task_submit_form_page(request):
 # after submit, show info
 def task_info_page(request):
 	context = {}
-	task_info = task_submit.objects.all().filter(theExaminer = request.user).latest('submitTime')
+	task_info = ts.objects.all().filter(theExaminer = request.user).latest('submitTime')
 	if task_info : 
 		last_update = task_info.submitTime
 		if ((last_update.year == timezone.now().year) and (last_update.month == timezone.now().month)) :
