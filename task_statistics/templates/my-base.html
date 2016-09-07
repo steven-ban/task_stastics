@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static 'my-base.css' %}" />	
+	<link rel="stylesheet" type="text/css" href="{% static "Bootstrap330/css/bootstrap.min.css" %}" />	
 
 
 <html lang="zh-cn">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}光学室信息管理系统{% endblock %}</title>
 </head>
 
 <body>
-	<div id="title">
-		<h1 align=center><img src="{% static "sipo-logo.jpg" %}" />国家知识产权局专利局专利审查协作河南中心光电技术发明审查部</h1>
-		<h1 align=center>光学室信息管理系统</h1>
+    <div class="container">
+	<div class="page-header" id="title">
+		<h1 align=center><img class="img-circle" src="{% static "sipo-logo.jpg" %}" width=1.5em/>审协河南中心光电部光学室信息管理系统</h1>
 	</div>
-	<div id="navibar" align=center>
-		<table>
-		<tr>
-			<td><a href = "/">首页</a></td>
-			<td><a href = "/task_submit/">任务量</a></td>
-		</tr>
-		</table>
-	</div>
-	<div id="sidebar">
-		<p align=right>当前时间：{% now "Y-m-d H:i:s" %}。</p>
+	<ul class="nav nav-tabs" id="navibar" role="tablist">
+			<li><a href = "/">首页</a></li>
+			<li><a href = "/task_submit/">任务量</a></li>
+	</ul>
+	<div class="container" id="sidebar">
+		<p>当前时间：{% now "Y-m-d H:i:s" %}。</p>
 		{% if user.is_authenticated %}
 			<p>欢迎你，{{user.username}}。</p>
 		{% else %}
@@ -39,7 +36,7 @@
 	
 	<hr>
 	
-	<div id="content" align=center>
+	<div class="container" id="content" align=center>
 		{% block content %}
 		{% endblock %}
 	</div>
@@ -48,5 +45,6 @@
 	<div id="bottom-section">
 		<p align = center>光学室信息管理系统，使用Python及Django框架开发，内含重要信息，仅供内部使用，请勿随意发布至互联网。</p>
 	</div>
+    </div>
 </body>
 </html>

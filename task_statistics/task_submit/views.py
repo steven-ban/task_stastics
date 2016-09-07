@@ -1,6 +1,7 @@
 #coding=utf-8
 
 from django.shortcuts import render, render_to_response
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.contrib.auth.models import User
@@ -14,6 +15,7 @@ from task_submit.form import task_submit_form
 from task_submit.models import task_submit as ts
 
 # submit form
+@login_required
 def task_submit_form_page(request):
 	form = task_submit_form(request.POST)
 	if form.is_valid():
@@ -32,6 +34,7 @@ def task_submit_form_page(request):
 			context_instance = RequestContext(request))
 		
 # after submit, show info
+@login_required
 def task_info_page(request):
 	context = {}
 	task_info = ts.objects.all().filter(theExaminer = request.user).latest('submitTime')
