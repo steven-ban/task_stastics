@@ -13,6 +13,7 @@ from decimal import Decimal, Context, getcontext
 
 from task_submit.form import task_submit_form
 from task_submit.models import task_submit as ts
+from task_submit.models import monthly_task as mt
 
 # submit form
 @login_required
@@ -37,14 +38,15 @@ def task_submit_form_page(request):
 @login_required
 def task_info_page(request):
 	context = {}
-	task_info = ts.objects.all().filter(theExaminer = request.user).latest('submitTime')
+	task_info = ts.objects.all().filter(theExaminer == request.user).latest('submitTime')
+    today = timezone.now()
 	if task_info : 
 		last_update = task_info.submitTime
-		if ((last_update.year == timezone.now().year) and (last_update.month == timezone.now().month)) :
+		if ((last_update.year == today.year) and (last_update.month == today.month)) :
 			# get and calc task info
 			decimalContext = Context(prec = 4)	# set Decimal precision
 			# yi tong
-			context['yiTongRenWuLiang'] = 8.05
+			context['yiTongRenWuLiang'] = mt.objects.all().filter(theExaminer = request.user and year == today.year and month == today.month).monthly_task
 			context['yiChuAn'] = task_info.yiChuAn
 			context['xyJian'] = task_info.xyJian
 			context['xyLv'] = task_info.xyJian / task_info.yiChuAn

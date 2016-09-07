@@ -17,13 +17,14 @@
 	<ul class="nav nav-tabs" id="navibar" role="tablist">
 			<li><a href = "/">首页</a></li>
 			<li><a href = "/task_submit/">任务量</a></li>
+            <li><a href="/accounts/">个人管理</a><li>
 	</ul>
 	<div class="container" id="sidebar">
 		<p>当前时间：{% now "Y-m-d H:i:s" %}。</p>
 		{% if user.is_authenticated %}
-			<p>欢迎你，{{user.username}}。</p>
+			<p>欢迎你，{{user.username}}。<a href = "/accounts/logout/">退出</p>
 		{% else %}
-			<p>请<a href = "/login/">登录。</a></p>
+			<p>请<a href = "/accounts/login/">登录。</a></p>
 		{% endif %}
 
 		{% block sidebar %}

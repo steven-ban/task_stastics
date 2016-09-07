@@ -18,9 +18,11 @@ from django.contrib import admin
 
 from task_statistics import views
 from task_submit import urls as submit_urls
+from examiner_auth import urls as user_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.home, name = "home"),
     url(r'^task_submit/', include(submit_urls)),
+    url(r'^accounts/', include(user_urls)),
 ]
