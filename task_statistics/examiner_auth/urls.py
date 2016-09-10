@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from examniner_auth import views
+import views
 
 urlpatterns = [
     url(r'^login/$', auth_views.login),

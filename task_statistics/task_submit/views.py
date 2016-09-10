@@ -1,6 +1,6 @@
 #coding=utf-8
 
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import RequestContext, loader
@@ -38,8 +38,9 @@ def task_submit_form_page(request):
 @login_required
 def task_info_page(request):
 	context = {}
-	task_info = ts.objects.all().filter(theExaminer == request.user).latest('submitTime')
-    today = timezone.now()
+	# task_info = ts.objects.all().filter(ts.theExaminer == request.user).latest('submitTime')
+	task_info = get_list_or_404(ts, theExaminer = request.user).lastest('submitTime')
+	today = timezone.now()
 	if task_info : 
 		last_update = task_info.submitTime
 		if ((last_update.year == today.year) and (last_update.month == today.month)) :
@@ -76,5 +77,6 @@ def task_info_page(request):
 			context['shiChe'] = 0
 			context['jieAnLiang'] = 0
 			context['jieAnLv'] = 0 * 100
+	
 
 	return render(request, 'task_submit/task_info.html', context)
