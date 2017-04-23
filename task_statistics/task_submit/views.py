@@ -38,16 +38,12 @@ def task_submit_form_page(request):
 @login_required
 def task_info_page(request):
 	context = {}
-<<<<<<< HEAD
-	task_info = ts(theExaminer = request.user).objects.all().latest('submitTime')
-	today = timezone.now()
+	
 	if task_info :
-=======
 	# task_info = ts.objects.all().filter(ts.theExaminer == request.user).latest('submitTime')
-	task_info = get_list_or_404(ts, theExaminer = request.user).lastest('submitTime')
-	today = timezone.now()
+		task_info = get_list_or_404(ts, theExaminer = request.user).lastest('submitTime')
+		today = timezone.now()
 	if task_info : 
->>>>>>> origin/master
 		last_update = task_info.submitTime
 		if ((last_update.year == today.year) and (last_update.month == today.month)) :
 			# get and calc task info
