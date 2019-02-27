@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from models import UserProfile, StudyTeam, Grade
+from .models import UserProfile, StudyTeam, Grade
 
 class UserProfileInline(admin.StackedInline):
 	model = UserProfile
@@ -13,7 +13,7 @@ class UserProfileInline(admin.StackedInline):
 	max_num = 1
 	
 class UserAdmin(UserAdmin):
-	inlines = (UserProfileInline, ) # ÔÚadminÒ³ÃæÖÐ²Ù×÷À©Õ¹×Ö¶Î
+	inlines = (UserProfileInline, ) # ï¿½ï¿½adminÒ³ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½Ö¶ï¿½
 #	fields = ['username', 'userProfile.nameZh', 'userProfile.examinationCode', 'userProfile.studyTeam', \
 #		'userProfile.grade']
 #	list_display = ('username', 'userProfile.nameZh', \
